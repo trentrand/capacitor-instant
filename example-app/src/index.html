@@ -2,23 +2,87 @@
 <html lang="en" dir="ltr" class="hydrated">
   <head>
     <meta charset="UTF-8" />
-    <title>Example Capacitor App</title>
+    <title>Instant App Example</title>
     <meta
       name="viewport"
       content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <meta name="format-detection" content="telephone=no" />
+    <style>
+      main {
+        padding: 20px;
+        font-family: system-ui, -apple-system, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .status {
+        padding: 10px;
+        border-radius: 8px;
+        margin: 10px 0;
+        font-weight: bold;
+      }
+      .status.instant {
+        background: #4CAF50;
+        color: white;
+      }
+      .status.full {
+        background: #2196F3;
+        color: white;
+      }
+      pre {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 8px;
+        overflow-x: auto;
+      }
+      code {
+        font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 14px;
+      }
+    </style>
   </head>
   <body>
     <main>
-      <h1>Capacitor Test Plugin Project</h1>
+      <h1>Instant App Status</h1>
+      <p>This example demonstrates how to check if your app is running as an instant app.</p>
+
+      <div id="status" class="status">Checking instant app status...</div>
+
+      <h2>Implementation</h2>
+      <p>Here's how this example works:</p>
+
+      <h3>1. Install the plugin</h3>
+      <pre><code>npm install @trentrand/capacitor-instant
+# or
+bun add @trentrand/capacitor-instant</code></pre>
+
+      <h3>2. Import and use the plugin</h3>
+      <pre><code>import { Instant } from '@trentrand/capacitor-instant';
+
+async function checkInstantStatus() {
+  try {
+    const { value: isInstant } = await Instant.isInstantApp();
+    console.log('Is instant app:', isInstant);
+
+    if (isInstant) {
+      // Running as Android Instant App or iOS App Clip
+    } else {
+      // Running as full app
+    }
+  } catch (error) {
+    console.error('Failed to check instant app status:', error);
+  }
+}</code></pre>
+
+      <h2>What is an instant app?</h2>
       <p>
-        This project can be used to test out the functionality of your plugin. Nothing in the
-        <em>example-app/</em> folder will be published to npm when using this template, so you can create away!
+        Instant apps allow users to run your app without installation:
+        <ul>
+          <li>Android Instant Apps: Run directly from Google Play</li>
+          <li>iOS App Clips: Quick access to part of your app</li>
+          <li>Web: Always returns false (not applicable)</li>
+        </ul>
       </p>
-      <label for="echoInput">Echo Text:</label>
-      <input type="text" id="echoInput" name="echoInput" value="Hello World!" />
-      <button onclick="testEcho()">Click Me!</button>
     </main>
 
     <script src="./js/example.js" type="module"></script>
