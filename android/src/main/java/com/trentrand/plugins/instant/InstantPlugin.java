@@ -8,15 +8,17 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 
 @CapacitorPlugin(name = "Instant")
 public class InstantPlugin extends Plugin {
+    private Instant implementation;
 
-    private Instant implementation = new Instant();
+    @Override
+    public void load() {
+        implementation = new Instant(getContext());
+    }
 
     @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
-
+    public void isInstantApp(PluginCall call) {
         JSObject ret = new JSObject();
-        ret.put("value", implementation.echo(value));
+        ret.put("value", implementation.isInstantApp());
         call.resolve(ret);
     }
 }

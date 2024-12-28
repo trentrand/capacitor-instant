@@ -1,11 +1,17 @@
 package com.trentrand.plugins.instant;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.util.Log;
 
 public class Instant {
+    private final boolean isInstantApp;
 
-    public String echo(String value) {
-        Log.i("Echo", value);
-        return value;
+    public Instant(Context context) {
+        this.isInstantApp = context.getPackageManager().isInstantApp();
+    }
+
+    public boolean isInstantApp() {
+        return isInstantApp;
     }
 }

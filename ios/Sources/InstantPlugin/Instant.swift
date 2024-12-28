@@ -1,8 +1,14 @@
 import Foundation
 
 @objc public class Instant: NSObject {
-    @objc public func echo(_ value: String) -> String {
-        print(value)
-        return value
+    private let isInstantAppValue: Bool
+
+    override init() {
+        self.isInstantAppValue = ProcessInfo.processInfo.environment["XCAppClipURL"] != nil
+        super.init()
+    }
+
+    @objc public func isInstantApp() -> Bool {
+        return isInstantAppValue
     }
 }

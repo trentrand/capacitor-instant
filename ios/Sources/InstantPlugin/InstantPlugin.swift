@@ -10,14 +10,13 @@ public class InstantPlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "InstantPlugin"
     public let jsName = "Instant"
     public let pluginMethods: [CAPPluginMethod] = [
-        CAPPluginMethod(name: "echo", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "isInstantApp", returnType: CAPPluginReturnPromise)
     ]
     private let implementation = Instant()
 
-    @objc func echo(_ call: CAPPluginCall) {
-        let value = call.getString("value") ?? ""
+    @objc func isInstantApp(_ call: CAPPluginCall) {
         call.resolve([
-            "value": implementation.echo(value)
+            "value": implementation.isInstantApp()
         ])
     }
 }

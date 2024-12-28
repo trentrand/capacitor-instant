@@ -13,24 +13,27 @@ npx cap sync
 
 <docgen-index>
 
-* [`echo(...)`](#echo)
+* [`isInstantApp()`](#isinstantapp)
 
 </docgen-index>
 
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-### echo(...)
+### isInstantApp()
 
 ```typescript
-echo(options: { value: string; }) => Promise<{ value: string; }>
+isInstantApp() => Promise<{ value: boolean; }>
 ```
 
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | <code>{ value: string; }</code> |
+Returns whether the app is running as an Android Instant App or iOS App Clip.
+This value is determined at app initialization and cached.
 
-**Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
+On Android: Uses PackageManager.isInstantApp()
+On iOS: Checks for XCAppClipURL environment variable
+On Web: Always returns false
+
+**Returns:** <code>Promise&lt;{ value: boolean; }&gt;</code>
 
 --------------------
 
